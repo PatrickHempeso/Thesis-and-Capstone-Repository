@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Dashboard (View Projects) | Thesis Repository</title>
+    <link href="design.css" rel="stylesheet">
+    <style>
+        /* Additional interactive styles */
+        .project-card {
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .submission-form {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="logo">
+                <img src="logo.png" alt="University Logo">
+            </div>
+            <h1>Welcome, Faculty</h1>
+        </div>
+        
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search..." id="searchInput">
+                    <button class="search-btn">🔍</button>
+                </div>
+                    <div class="user-actions">
+                        <a href="facultydash.html" class="btn btn-secondary">← Dashboard</a>
+                        <a href="login.html" class="btn btn-logout">Logout</a>
+                    </div>
+
+            </div>
+            
+            <div class="dashboard-content">
+
+
+                <div class="sort-options">
+                    <label>SORT BY:</label>
+                    <select id="sortSelect">
+                        <option value="a-z">A-Z</option>
+                        <option value="z-a">Z-A</option>
+                        <option value="date">Date</option>
+                        <option value="degree">Degree Level</option>
+                        <option value="author-a">Author A-Z</option>
+                        <option value="author-z">Author Z-A</option>
+                        <option value="program">Program</option>
+                    </select>
+                </div>
+                
+                <h2 class="section-title">CAPSTONE PROJECTS</h2>
+                
+                <div class="recent-projects">
+                    <h3 class="subsection-title">RECENTLY OPENED</h3>
+                    <div class="project-tags" id="recentProjects">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Projects will be loaded here dynamically -->
+                </div>
+                
+                <div class="pagination">
+                    <span>Page 1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data - in real app, this would come from a database
+        const projects = [
+            { id: 1, title: "BSIT-BTM 1", type: "Undergraduate - BSIT-BTM", author: "John Doe", date: "2023-05-15" },
+            { id: 2, title: "BSIT-BTM 2", type: "Undergraduate - BSIT-BTM", author: "Jane Smith", date: "2023-06-20" },
+            { id: 3, title: "MIT 1", type: "Postgraduate - MIT", author: "Robert Johnson", date: "2023-04-10" },
+            { id: 4, title: "BSIT-IS 1", type: "Undergraduate - BSIT-IS", author: "Maria Garcia", date: "2023-07-05" },
+            { id: 5, title: "BSCS 1", type: "Undergraduate - BSCS", author: "David Lee", date: "2023-03-22" },
+            { id: 6, title: "MLIS 1", type: "Postgraduate - MLIS", author: "Sarah Williams", date: "2023-08-12" },
+            { id: 7, title: "DIT 1", type: "Postgraduate - DIT", author: "Michael Brown", date: "2023-09-01" }
+        ];
+
+        // Load projects on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProjects(projects);
+            renderRecentProjects();
+        });
+
+        // Render projects grid
+        function renderProjects(projectsToRender) {
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = '';
+            
+            projectsToRender.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <div class="project-badge">PDF</div>
+                    <h3>${project.title}</h3>
+                    <p>${project.type}</p>
+                    <p class="author">By: ${project.author}</p>
+                    <div class="action-buttons">
+                        <button class="btn btn-view" onclick="viewProject(${project.id})">View</button>
+                        <button class="btn btn-download" onclick="downloadProject(${project.id})">Download</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Render recent projects
+        function renderRecentProjects() {
+            const recentContainer = document.getElementById('recentProjects');
+            recentContainer.innerHTML = '';
+            
+            // Get last 3 viewed projects (in a real app, this would come from user history)
+            const recent = projects.slice(0, 3);
+            
+            recent.forEach(project => {
+                const tag = document.createElement('span');
+                tag.className = 'project-tag';
+                tag.textContent = project.title;
+                tag.onclick = () => viewProject(project.id);
+                recentContainer.appendChild(tag);
+            });
+        }
+
+        // Project actions
+        function viewProject(id) {
+            // In a real app, this would open the project details
+            alert(`Viewing project ${id}`);
+            // Add to recently viewed
+        }
+
+        function downloadProject(id) {
+            // In a real app, this would initiate download
+            alert(`Downloading project ${id}`);
+        }
+
+        // Submission form handling
+        function showSubmissionForm() {
+            document.getElementById('submissionForm').style.display = 'block';
+            document.getElementById('newProjectBtn').style.display = 'none';
+        }
+
+        function hideSubmissionForm() {
+            document.getElementById('submissionForm').style.display = 'none';
+            document.getElementById('newProjectBtn').style.display = 'block';
+        }
+
+        // Form submission
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('projectTitle').value;
+            const file = document.getElementById('projectFile').files[0];
+            
+            if (title && file) {
+                // In a real app, this would upload to server
+                alert(`Project "${title}" submitted successfully!`);
+                hideSubmissionForm();
+                this.reset();
+                
+                // Add to projects list (in real app, would refresh from server)
+                const newProject = {
+                    id: projects.length + 1,
+                    title: title,
+                    type: "New Submission",
+                    author: "You",
+                    date: new Date().toISOString().split('T')[0]
+                };
+                projects.unshift(newProject);
+                renderProjects(projects);
+            }
+        });
+
+        // Search functionality
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = projects.filter(p => 
+                p.title.toLowerCase().includes(searchTerm) || 
+                p.author.toLowerCase().includes(searchTerm)
+            );
+            renderProjects(filtered);
+        });
+
+        // Sort functionality
+        document.getElementById('sortSelect').addEventListener('change', function() {
+            const sortBy = this.value;
+            let sorted = [...projects];
+            
+            switch(sortBy) {
+                case 'a-z':
+                    sorted.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                case 'z-a':
+                    sorted.sort((a, b) => b.title.localeCompare(a.title));
+                    break;
+                case 'date':
+                    sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    break;
+                case 'author-a':
+                    sorted.sort((a, b) => a.author.localeCompare(b.author));
+                    break;
+                case 'author-z':
+                    sorted.sort((a, b) => b.author.localeCompare(a.author));
+                    break;
+            }
+            
+            renderProjects(sorted);
+        });
+    </script>
+</body>
+</html>

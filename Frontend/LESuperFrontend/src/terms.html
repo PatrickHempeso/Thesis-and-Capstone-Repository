@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms Agreement | Thesis Repository</title>
+    <link href="design.css" rel="stylesheet">
+    <style>
+        /* Terms Page Specific Styles */
+        .terms-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .terms-content {
+            max-height: 50vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #f9f9f9;
+            line-height: 1.6;
+        }
+
+        .terms-content p {
+            margin-bottom: 1rem;
+        }
+
+        .terms-list {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .terms-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .agreement-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .terms-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="logo">
+                <img src="logo.png" alt="University Logo">
+            </div>
+            <h1>Thesis/Capstone Repository - MCIIS</h1>
+        </div>
+        
+        <div class="terms-container">
+            <div class="terms-header">
+                <h2>Repository Terms of Use</h2>
+                <p>University of Southwestern Philippines</p>
+            </div>
+            
+            <div class="terms-content">
+                <p><strong>Welcome to our Thesis/Capstone Repository</strong></p>
+                
+                <p>This digital repository is designed for the storage and management of theses and capstone projects completed by students of the College of Information and Computation (IoC) at the University of Southwestern Philippines (USAP).</p>
+                
+                <p><strong>Important Notice:</strong></p>
+                <p>All submitted works are governed by the university's academic policies and the Data Privacy Act of 2012. By using this system, you agree to comply with all applicable regulations and guidelines.</p>
+                
+                <p><strong>Terms and Conditions:</strong></p>
+                <ol class="terms-list">
+                    <li><strong>Original Work:</strong> All submissions must be the original work of the submitting students.</li>
+                    <li><strong>Faculty Review:</strong> All content is subject to review and approval by faculty members.</li>
+                    <li><strong>Intellectual Property:</strong> Works remain the intellectual property of their creators while granting the university limited usage rights.</li>
+                    <li><strong>Data Privacy:</strong> Personal information will be handled in accordance with the Data Privacy Act.</li>
+                    <li><strong>Authorized Use:</strong> Materials may only be accessed and used for academic purposes.</li>
+                    <li><strong>System Integrity:</strong> Users must not attempt to compromise the security or functionality of the repository.</li>
+                </ol>
+                
+                <p>By proceeding, you acknowledge that you have read, understood, and agreed to these terms in their entirety.</p>
+            </div>
+            
+            <div class="agreement-controls">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I have read and agree to the Terms and Conditions above</label>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="acceptBtn" class="btn btn-primary" disabled>Accept & Continue to Repository</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enable/disable accept button based on checkbox
+        document.getElementById('agreeTerms').addEventListener('change', function() {
+            document.getElementById('acceptBtn').disabled = !this.checked;
+        });
+        
+        // Handle acceptance
+        document.getElementById('acceptBtn').addEventListener('click', function() {
+            // Store acceptance for 30 days
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 30);
+            document.cookie = `termsAccepted=true; expires=${expiryDate.toUTCString()}; path=/`;
+            
+            // Redirect to welcome
+            window.location.href = "welcome.html";
+        });
+        
+        // Check for existing acceptance
+        function checkTermsAccepted() {
+            return document.cookie.split(';').some((item) => item.trim().startsWith('termsAccepted='));
+        }
+        
+        // Redirect if already accepted
+        if (checkTermsAccepted()) {
+            window.location.href = "welcome.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Repository | Thesis Repository</title>
+    <link href="design.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="logo">
+                <img src="logo.png" alt="University Logo">
+            </div>
+            <h1>PROJECT REPOSITORY</h1>
+        </div>
+        
+        <div class="app-body">
+            <!-- Guest Notice Banner -->
+            <script>
+                if (localStorage.getItem('guestMode') === 'true') {
+                    document.write(`
+                        <div class="guest-notice">
+                            <span>You are browsing as a guest</span>
+                            <a href="login.html" class="btn btn-small">Login to Access More Features</a>
+                        </div>
+                    `);
+                }
+            </script>
+            
+            <div class="search-filter">
+                <input type="text" placeholder="Search projects..." class="searchbar">
+                <select class="filter-dropdown">
+                    <option>All Programs</option>
+                    <option>BSIT-IS</option>
+                    <option>BSIT-BTM</option>
+                    <option>BSCS</option>
+                    <option>DIT</option>
+                    <option>MIT</option>
+                    
+                </select>
+                <select class="sort-dropdown">
+                    <option>Sort by: Newest</option>
+                    <option>Sort by: Oldest</option>
+                </select>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project cards would be dynamically loaded -->
+            </div>
+            
+            <div class="back-link">
+                <script>
+                    if (localStorage.getItem('guestMode') === 'true') {
+                        document.write('<a href="guestdash.html" class="btn btn-secondary">Back to Guest Dashboard</a>');
+                    } else {
+                        // Regular user navigation
+                        const params = new URLSearchParams(window.location.search);
+                        if (params.has('student')) {
+                            document.write('<a href="studentdash.html" class="btn btn-secondary">Back to Dashboard</a>');
+                        } else {
+                            document.write('<a href="facultydash.html" class="btn btn-secondary">Back to Dashboard</a>');
+                        }
+                    if (window.location.search.includes('logout=true')) {
+            localStorage.removeItem('guestMode');
+        }
+                    }
+
+
+                </script>
+            </div>
+        </div>
+    </div>
+    
+    <div class="university-footer">
+        <div class="university-name">UNIVERSITY OF SOUTHEASTERN PHILIPPINES</div>
+        <div class="footer-links">
+            <a href="https://www.usep.edu.ph">Contact Us</a>
+            <a href="https://www.usep.edu.ph">University</a>
+            <a href="https://www.usep.edu.ph">Technical Support</a>
+        </div>
+        <div class="copyright">© 2025 University of Southeastern Philippines</div>
+    </div>
+    </div>
+</body>
+</html>

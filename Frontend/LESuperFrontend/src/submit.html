@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Project | Thesis Repository</title>
+    <link href="design.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="logo">
+                <img src="logo.png" alt="University Logo">
+            </div>
+            <h1>SUBMIT CAPSTONE PROJECT</h1>
+        </div>
+        
+        <div class="app-body">
+            <form class="submission-form">
+                <div class="form-group">
+                    <label for="project-title">Project Title</label>
+                    <input type="text" id="project-title" placeholder="Enter your project title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="authors">Author(s)</label>
+                    <input type="text" id="authors" placeholder="Enter author names (comma separated)" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="program">Program</label>
+                    <select id="program" required>
+                        <option value="">Select program</option>
+                        <option value="BSIT-IS">BSIT-IS</option>
+                        <option value="BSIT-BTM">BSIT-BTM</option>
+                        <option value="BSCS">BSCS</option>
+                        <option value="BLIS">BLIS</option>
+                        <option value="MIT">MIT</option>
+                        <option value="DIT">DIT</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="abstract">Abstract (Minimum 200 words)</label>
+                    <textarea id="abstract" rows="8" placeholder="Enter your project abstract..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="document">Upload Document (PDF only)</label>
+                    <input type="file" id="document" accept=".pdf" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Submit Project</button>
+                    <a href="studentdash.html" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="university-footer">
+        <div class="university-name">UNIVERSITY OF SOUTHEASTERN PHILIPPINES</div>
+        <div class="university-tagline">We build dreams without limits</div>
+        <div class="footer-links">
+            <a href="https://www.usep.edu.ph">CONTACT US</a>
+            <a href="https://www.usep.edu.ph">UNIVERSITY</a>
+            <a href="https://www.usep.edu.ph">TECHNICAL SUPPORT</a>
+            <a href="https://www.usep.edu.ph">Mindanao eLearning Space</a>
+        </div>
+        <div class="copyright">2025 University of Southeastern Philippines. All Rights Reserved.</div>
+    </div>
+    </div>
+    
+    <script>
+        document.querySelector('.submission-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Validate form
+            const abstract = document.getElementById('abstract').value;
+            if (abstract.split(/\s+/).length < 200) {
+                alert('Abstract must be at least 200 words');
+                return;
+            }
+            // In real app, would submit to server
+            alert('Project submitted successfully!');
+            window.location.href = "../student/dashboard.html";
+        });
+    </script>
+</body>
+</html>

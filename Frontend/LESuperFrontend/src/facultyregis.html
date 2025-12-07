@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Registration | Thesis Repository</title>
+    <link href="design.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="logo">
+                <img src="logo.png" alt="University Logo">
+            </div>
+            <h1>FACULTY REGISTRATION</h1>
+        </div>
+        
+        <div class="app-body">
+            <form class="registration-form" id="facultyRegistrationForm">
+                <h2>Create Faculty Account</h2>
+                
+                <div class="form-group">
+                    <label for="faculty-fullname">Full Name</label>
+                    <input type="text" id="faculty-fullname" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="faculty-email">University Email</label>
+                    <input type="email" id="faculty-email" placeholder="Enter your university email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="faculty-department">Department</label>
+                    <select id="faculty-department" required>
+                        <option value="">Select your department</option>
+                        <option value="Information Systems">Information Systems</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Library Science">Library Science</option>
+                        <option value="Information Technology">Information Technology</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="faculty-position">Position</label>
+                    <input type="text" id="faculty-position" placeholder="E.g. Professor, Assistant Professor" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="faculty-id">Faculty ID Number</label>
+                    <input type="text" id="faculty-id" placeholder="Enter your faculty ID" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="faculty-password">Create Password</label>
+                    <input type="password" id="faculty-password" placeholder="Create a password" required>
+                    <div class="password-hint">Minimum 8 characters with at least 1 number</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="faculty-confirm-password">Confirm Password</label>
+                    <input type="password" id="faculty-confirm-password" placeholder="Confirm your password" required>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="faculty-terms" required>
+                    <label for="faculty-terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <a href="register.html" class="btn btn-secondary">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="university-footer">
+        <!-- Same footer as register.html -->
+    </div>
+    
+    <script>
+        document.getElementById('facultyRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate passwords match
+            const password = document.getElementById('faculty-password').value;
+            const confirmPassword = document.getElementById('faculty-confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            // Validate password strength
+            if (password.length < 8 || !/\d/.test(password)) {
+                alert('Password must be at least 8 characters with at least 1 number');
+                return;
+            }
+            
+            // If validation passes, redirect to login
+            alert('Registration successful! Please login with your new account');
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+</html>

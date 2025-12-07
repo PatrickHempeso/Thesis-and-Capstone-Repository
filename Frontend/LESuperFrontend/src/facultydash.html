@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Dashboard | Thesis Repository</title>
+    <link href="design.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="logo">
+                <img src="logo.png" alt="University Logo">
+            </div>
+            <h1>Welcome, Faculty</h1>
+        </div>
+        
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="user-actions">
+                    <a href="login.html" class="btn btn-logout">Logout</a>
+                </div>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="sort-options">
+                    <label>SORT BY:</label>
+                    <select>
+                        <option>A-Z</option>
+                        <option>Z-A</option>
+                        <option>Date</option>
+                        <option>Degree Level</option>
+                        <option>Author A-Z</option>
+                        <option>Author Z-A</option>
+                        <option>Program</option>
+                    </select>
+               
+                </div>
+                
+                <h2 class="section-title">CAPSTONE PROJECTS</h2>
+                
+            <div class="faculty-actions">
+                <a href="managerepository.html" class="btn btn-primary">Manage Repository</a>
+                <a href="projects.html" class="btn btn-secondary">View All Projects</a>
+            
+            </div>
+                
+                <div class="projects-grid">
+                    <!-- Same project cards as student dashboard -->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

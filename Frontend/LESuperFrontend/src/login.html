@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Thesis Repository</title>
+    <link href="design.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <div class="logo">
+                <img src="logo.png" alt="University Logo">
+            </div>
+            <h1>LOGIN</h1>
+        </div>
+        
+        <div class="app-body">
+            <form class="auth-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email" required
+                    style ="color: black;">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label>Login as:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="student-login" name="role" value="student" checked>
+                        <label for="student-login">Student</label>
+                        <input type="radio" id="faculty-login" name="role" value="faculty">
+                        <label for="faculty-login">Faculty</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <a href="welcome.html" class="btn btn-secondary">Back</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+    <script>
+    // Clear guest mode when arriving at login page
+    localStorage.removeItem('guestMode');
+    
+    document.querySelector('.auth-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Clear guest mode when logging in
+        localStorage.removeItem('guestMode');
+        
+        const role = document.querySelector('input[name="role"]:checked').value;
+        if (role === 'student') {
+            window.location.href = "studentdash.html";
+        } else {
+            window.location.href = "facultydash.html";
+        }
+    });
+</script>
+<script>
+    // Check if terms were accepted
+    if (localStorage.getItem('termsAccepted') !== 'true') {
+        window.location.href = "terms.html";
+
+    }
+</script>
+</body>
+</html>
