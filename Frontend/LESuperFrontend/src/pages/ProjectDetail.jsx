@@ -18,11 +18,12 @@ function ProjectDetail({ guestMode }) {
     const endpoint = guestMode
       ? `/api/guest/document/${id}` // guest fetch
       : type === 'capstone'
-        ? `/api/faculty/capstone/${id}` // faculty capstone fetch
-        : `/api/faculty/thesis/${id}`;   // faculty thesis fetch
+        ? `/api/student/capstones/${id}` // capstone fetch
+        : `/api/student/theses/${id}`;   // thesis fetch
 
     axios.get(`http://127.0.0.1:8000${endpoint}`)
       .then((res) => {
+        // Normalize the data to match your frontend fields
         const data = res.data;
         const normalized = {
           id: data.CapstoneID || data.ThesisID,
@@ -48,7 +49,7 @@ function ProjectDetail({ guestMode }) {
         <AppHeader title="PROJECT ABSTRACT" />
         <div className="dashboard-content" style={{ textAlign: 'center', marginTop: '50px' }}>
           <h3>No project data found.</h3>
-          <Link to={guestMode ? '/dashboard/guest' : '/dashboard/faculty'} className="btn btn-secondary" style={{ padding: '10px 16px', borderRadius: '8px' }}>Back</Link>
+          <Link to={guestMode ? '/dashboard/guest' : '/dashboard/student'} className="btn btn-secondary" style={{ padding: '10px 16px', borderRadius: '8px' }}>Back</Link>
         </div>
         <UniversityFooter />
       </div>
@@ -71,7 +72,7 @@ function ProjectDetail({ guestMode }) {
           </div>
         </div>
         <div className="back-link" style={{ marginTop: '20px', textAlign: 'center' }}>
-          <Link to={guestMode ? '/dashboard/guest' : '/dashboard/faculty'} className="btn btn-secondary" style={{ padding: '10px 16px', borderRadius: '8px', display: 'inline-block' }}>
+          <Link to={guestMode ? '/dashboard/guest' : '/dashboard/student'} className="btn btn-secondary" style={{ padding: '10px 16px', borderRadius: '8px', display: 'inline-block' }}>
             Back to Projects
           </Link>
         </div>

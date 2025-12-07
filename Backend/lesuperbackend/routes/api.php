@@ -8,6 +8,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\CapstoneController;
 use App\Http\Controllers\ThesisController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\ProjectSubmissionController;
 
 // -------------------- PUBLIC API ROUTES --------------------
 
@@ -31,8 +32,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/faculty/capstone/{id}', [CapstoneController::class, 'viewCapstone']);
     Route::get('/faculty/theses', [ThesisController::class, 'listTheses']);
     Route::get('/faculty/thesis/{id}', [ThesisController::class, 'viewThesis']);
+    Route::get('/search/faculty', [StudentController::class, 'searchFaculty']);
 
     // Student routes
+    Route::get('/student/profile', [StudentController::class, 'getAuthenticatedAuthor']);
     Route::get('/student/dashboard', [StudentController::class, 'dashboard']);
     Route::get('/student/documents', [DocumentController::class, 'listDocuments']);
     Route::get('/student/document/{id}', [DocumentController::class, 'viewDocument']);
@@ -40,4 +43,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/student/capstone/{id}', [CapstoneController::class, 'viewCapstone']);
     Route::get('/student/theses', [ThesisController::class, 'listTheses']);
     Route::get('/student/thesis/{id}', [ThesisController::class, 'viewThesis']);
+    Route::get('/search/students', [StudentController::class, 'searchStudents']);
+
+    // Thesis Submission
+    Route::post('/thesis/submit-metadata', [ProjectSubmissionController::class, 'submitThesis']);
+    // Capstone Submission
+    Route::post('/capstone/submit-metadata', [ProjectSubmissionController::class, 'submitCapstone']);
 });
