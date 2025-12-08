@@ -17,6 +17,7 @@ function GuestDashboard() {
   useEffect(() => {
     axios.get("http://localhost:8000/api/dashboard/guest")
       .then((res) => {
+        console.log(res);
         const mapped = res.data.documents.map((doc) => ({
           id: doc.DocumentID, // <-- use DocumentID from your table
           title: doc.Title,
